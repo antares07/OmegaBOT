@@ -1,1 +1,3 @@
 token.ini
+__pycache__/
+config.json
