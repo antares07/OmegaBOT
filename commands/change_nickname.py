@@ -1,13 +1,12 @@
 import discord
 from discord.ext import commands
 import json
-from functions.utils import get_config_path
 import logging
 
 class ChangeNickname(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
-        with open(get_config_path("config.json")) as file:
+        with open("config.json") as file:
             self.channel_ids = json.load(file)["channels_id"]
         self.logger = logging.getLogger("discord")
 
@@ -25,7 +24,7 @@ class ChangeNickname(commands.Cog):
 
     # Automatic change of name when server is joined
     @commands.Cog.listener()
-    async def on_message(self, message):
+    async def on_message(self, message: discord.Message):
         if message.channel.id == self.channel_ids['only_sup_id'] and message.author.bot:
             return
         elif message.channel.id == self.channel_ids['only_sup_id']:
@@ -37,5 +36,5 @@ class ChangeNickname(commands.Cog):
             except Exception as e:
                 print(e)
 
-async def setup(bot):
+async def setup(bot: commands.Bot):
     await bot.add_cog(ChangeNickname(bot))
