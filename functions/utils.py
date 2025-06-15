@@ -16,12 +16,15 @@ def get_config_path(file_name):
     
     return config_path
 
-def guild_id():
+def guild_id(object: bool = True):
 
     import discord
     import json
 
     with open("config.json") as file:
-        guild_id = discord.Object(id=json.load(file)["guild_id"])
+        if object:
+            guild_id = discord.Object(id=json.load(file)["guild_id"])
+        else:
+            guild_id = json.load(file)["guild_id"]
 
     return guild_id

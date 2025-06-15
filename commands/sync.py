@@ -16,7 +16,7 @@ class SyncCommands(commands.Cog):
     @commands.command(name='sync', description='Sync all commands')
     async def sync(self, ctx: commands.Context):
         cogs = await self.bot.tree.sync(guild=guild_id())
-        self.logger.info(f'Syncronized {len(cogs)} command(s)')
+        self.logger.info(f'Syncronized {len(cogs)} command(s): {[cog.name for cog in cogs]}')
         await ctx.send(f'Syncronized {len(cogs)} command(s)', ephemeral=True)
 
 async def setup(bot: commands.Bot):

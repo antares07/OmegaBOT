@@ -22,4 +22,4 @@ class Giongio(commands.Cog):
             print(e)
 
 async def setup(bot: commands.Bot):
-    await bot.add_cog(Giongio(bot))
+    await bot.add_cog(Giongio(bot), guilds=[guild_id()])

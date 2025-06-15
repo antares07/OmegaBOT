@@ -3,7 +3,6 @@ from discord.ext import commands
 import os
 from functions.config import token
 import logging
-from collections import Counter
 
 class OmegaBot(commands.Bot):
     def __init__(self, command_prefix, intents):
