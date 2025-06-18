@@ -6,8 +6,8 @@ from functions.utils import guild_id
 
 class AlertMessage(commands.Cog):
 
-    def __init__(self, bot):
-        self.bot=bot
+    def __init__(self, bot: commands.Bot):
+        self.bot = bot
         self.logger = logging.getLogger("discord")
 
     @commands.Cog.listener()
@@ -18,13 +18,13 @@ class AlertMessage(commands.Cog):
     @app_commands.guilds(guild_id())
     async def alert_message(self, interaction: discord.Interaction, message: str):
         try:
-            embed = discord.Embed(title='Salve Tenno! Il grande capo richiede la vostra attenzione',
+            embed = discord.Embed(title=f'Salve Tenno! Il grande capo {self.bot.get_guild(guild_id(False)).owner.nick} richiede la vostra attenzione',
                                   colour=discord.Colour.purple())
             embed.add_field(name=f':bangbang:`{message}`:bangbang:', value='', inline=False)
             embed.add_field(name='Grazie a tutti per l\'attenzione', value='Potete tornare ai vostri sporchi affari...')
             await interaction.response.send_message(embed=embed)
         except Exception as e:
-            print(e)
+            self.logger.error(f"Error in alert message: {e}")
             
 async def setup(bot: commands.Bot):
     await bot.add_cog(AlertMessage(bot), guilds=[guild_id()])

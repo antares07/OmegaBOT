@@ -25,5 +25,5 @@ class OmegaBot(commands.Bot):
         
 def main():
     intents = discord.Intents.all()
-    bot = OmegaBot(command_prefix="!", intents=intents)
+    bot: commands.Bot = OmegaBot(command_prefix="$", intents=intents)
     bot.run(token())
